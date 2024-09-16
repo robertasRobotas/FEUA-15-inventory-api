@@ -11,7 +11,7 @@ import auth from "../middleware/auth.js";
 const router = express.Router();
 
 router.post("/inventories", auth, CREATE_INVENTORY);
-router.get("/inventories/company/:companyId", GET_COMPANY_INVENTORIES);
+router.get("/inventories/company", auth, GET_COMPANY_INVENTORIES);
 router.get("/inventories/:id", GET_INVENTORY_BY_ID);
 router.delete("/inventories/:id", DELETE_INVENTORY_BY_ID);
 

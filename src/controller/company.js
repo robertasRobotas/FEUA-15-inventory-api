@@ -53,7 +53,7 @@ const LOGIN = async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    return res.status(200).json({ token: token });
+    return res.status(200).json({ token: token, companyId: company.id });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "error in application" });
@@ -90,4 +90,19 @@ const DELETE_COMPANY_BY_ID = async (req, res) => {
   }
 };
 
-export { CREATE_COMPANY, GET_COMPANY_BY_ID, LOGIN, DELETE_COMPANY_BY_ID };
+const VALIDATE_LOGIN = async (req, res) => {
+  try {
+    return res.status(200).json({ message: "user ok" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "error in application" });
+  }
+};
+
+export {
+  CREATE_COMPANY,
+  GET_COMPANY_BY_ID,
+  LOGIN,
+  DELETE_COMPANY_BY_ID,
+  VALIDATE_LOGIN,
+};

@@ -26,7 +26,7 @@ const CREATE_INVENTORY = async (req, res) => {
 
 const GET_COMPANY_INVENTORIES = async (req, res) => {
   try {
-    const response = await InventoryModel.find();
+    const response = await InventoryModel.find({ officeId: req.body.officeId });
 
     return res.status(200).json({ inventories: response });
   } catch (err) {
@@ -39,7 +39,7 @@ const GET_INVENTORY_BY_ID = async (req, res) => {
   try {
     const response = await InventoryModel.findOne({ id: req.params.id });
 
-    return res.status(200).json({ inventories: response });
+    return res.status(200).json({ inventory: response });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "error in application" });
@@ -53,11 +53,9 @@ const DELETE_INVENTORY_BY_ID = async (req, res) => {
     });
 
     if (!response) {
-      return res
-        .status(404)
-        .json({
-          message: "This inventory does not exist, so you can not delete it",
-        });
+      return res.status(404).json({
+        message: "This inventory does not exist, so you can not delete it",
+      });
     }
 
     return res
